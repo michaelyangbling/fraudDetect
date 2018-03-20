@@ -2,4 +2,11 @@ PCA to reduce dimension, since feature is sparse due to too many categories in a
 Auc cost function or weighted training to deal with imbalanced classes
 time can be split into time windows to be categorical, or just use continuous time
 wide and deep NN may need detailed tuning
+
+hash categories may help:
+As with many counterintuitive phenomena in machine learning, 
+it turns out that hashing often works well in practice. 
+That's because hash categories provide the model with some separation.
+
+
 ...

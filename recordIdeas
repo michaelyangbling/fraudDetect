@@ -1,0 +1,5 @@
+PCA to reduce dimension, since feature is sparse due to too many categories in a categorical feature, when using dummy encoding
+Auc cost function or weighted training to deal with imbalanced classes
+time can be split into time windows to be categorical, or just use continuous time
+wide and deep NN may need detailed tuning
+...

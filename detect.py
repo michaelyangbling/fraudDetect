@@ -38,3 +38,27 @@ subm = pd.DataFrame()
 subm['click_id'] = ids
 subm['is_attributed'] = score
 subm.to_csv(data_path + 'submission_lgbm.csv.gz', compression = 'gzip', index=False, float_format = '%.5f')
+
+gain = model.feature_importance('gain')
+ft = pd.DataFrame({'feature':model.feature_name(), 'split':model.feature_importance('split'),
+                   'gain':100 * gain / gain.sum()}).sort_values('gain', ascending=False)
+print(ft)
+
+# ft
+#       feature       gain  split
+# 1         app  48.748118    417
+# 4     channel  32.522669   1024
+# 0          ip  10.113573   5224
+# 3          os   6.999925    472
+# 5  click_time   1.270663    215
+# 2      device   0.345052     48
+
+# ip               category
+# app              category
+# device           category
+# os               category
+# channel          category
+# click_time       category
+# is_attributed        bool
+
+# simple LGBM: kaggle-test-score: 0.9622

@@ -40,11 +40,12 @@ myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_lis
 myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='device',vocabulary_list=trn.device.unique() ))
 myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='os',vocabulary_list=trn.os.unique() ))
 myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='channel',vocabulary_list=trn.channel.unique() ))
-myFeatureColumns.append(tf.feature_column.numeric_column(key='scaledHour'))
+
 myFeatureColumns.append(tf.feature_column.bucketized_column(
     source_column = tf.feature_column.numeric_column("click_hour"), # bucketize time
     boundaries = [2.5,5.5, 8.5,11.5,14.5,17.5,20.5])
 )
+myFeatureColumns.append(tf.feature_column.numeric_column(key='scaledHour'))
 tst=trainSmall.tail(1*(10 ** 5))
 
 def getWeight(train): # set weight for imbalanced class

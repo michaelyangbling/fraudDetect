@@ -7,15 +7,16 @@ import math
 import gc
 data_path="/Users/yzh/Desktop/fraudDetect/"
 
-train=pd.read_csv( data_path+'train.csv.zip', dtype={'ip':'int32','app':'uint8','device':'int8',
-                  'os':'uint8','channel':'int16','is_attributed':'bool_'}
+train=pd.read_csv( data_path+'train.csv.zip', dtype={'ip':'int32','app':'int16','device':'int16',
+                  'os':'int16','channel':'int16','is_attributed':'bool_'}
                     ,parse_dates=['click_time'], usecols=[0,1,2,3,4,5,7])#shrink according to data distribution
 
-test=pd.read_csv( data_path+'test.csv.zip', dtype={'ip':'int32','app':'uint8','device':'int8',
-                  'os':'uint8','channel':'int16'}
+test=pd.read_csv( data_path+'test.csv.zip', dtype={'ip':'int32','app':'int16','device':'int16',
+                  'os':'int16','channel':'int16'}
                     ,parse_dates=['click_time'])
+print("finished loading")
 test['click_hour']=test['click_time'].dt.hour.astype(np.int8) #turn into hour
-train['click_hout']=train['click_time'].dt.hour.astype(np.int8)
+train['click_hour']=train['click_time'].dt.hour.astype(np.int8)
 
 from sklearn.preprocessing import StandardScaler
 timeScaler=StandardScaler()  # feature scaling
@@ -32,18 +33,28 @@ def input_func(train):
 
 trainSmall = train.sample(5 * (10 ** 5))
 
+trn=trainSmall.head(4*(10 ** 5))
 myFeatureColumns=[]
-myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='ip',vocabulary_list=trainSmall.ip.unique() ))
-myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='app',vocabulary_list=trainSmall.app.unique() ))
-myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='device',vocabulary_list=trainSmall.device.unique() ))
-myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='os',vocabulary_list=trainSmall.os.unique() ))
-myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='os',vocabulary_list=trainSmall.channel.unique() ))
+myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='ip',vocabulary_list=trn.ip.unique() ))
+myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='app',vocabulary_list=trn.app.unique() ))
+myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='device',vocabulary_list=trn.device.unique() ))
+myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='os',vocabulary_list=trn.os.unique() ))
+myFeatureColumns.append(tf.feature_column.categorical_column_with_vocabulary_list( key='channel',vocabulary_list=trn.channel.unique() ))
 myFeatureColumns.append(tf.feature_column.numeric_column(key='scaledHour'))
 myFeatureColumns.append(tf.feature_column.bucketized_column(
     source_column = tf.feature_column.numeric_column("click_hour"), # bucketize time
     boundaries = [2.5,5.5, 8.5,11.5,14.5,17.5,20.5])
 )
+tst=trainSmall.tail(1*(10 ** 5))
 
+def getWeight(train): # set weight for imbalanced class
+    num1=train.is_attributed.sum()
+    if num1==0: #only 0 in training set label
+        print("only 0 in training set label ")
+    else:
+        weight1=(train.shape[0]-num1)/num1
+        print(weight1)
+        train['weight']=train.is_attributed.apply(lambda x: weight1 if x==1 else 1)
 
 # some  data analysis
 # print(pd.isnull(train).sum())  #no na in test data

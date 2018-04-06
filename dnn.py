@@ -6,7 +6,7 @@ import datetime
 import math
 import gc
 data_path="/Users/yzh/Desktop/fraudDetect/"
-
+#skip=range(5*(10**7),18*(10**7))
 train=pd.read_csv( data_path+'train.csv.zip', dtype={'ip':'int32','app':'int16','device':'int16',
                   'os':'int16','channel':'int16','is_attributed':'bool_'}
                     ,parse_dates=['click_time'], usecols=[0,1,2,3,4,5,7])#shrink according to data distribution
@@ -136,7 +136,7 @@ print((auc(a2,b2)))
 
 #
 # np.unique(train.ip)
-# 
+#
 
 
 # train.describe()

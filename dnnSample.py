@@ -57,17 +57,18 @@ classifier = tf.estimator.DNNClassifier(
     weight_column=tf.feature_column.numeric_column(key='weight'))
 # classifier.train(
 #     input_fn=lambda:input_func(trn,1000),steps=100) # batch size=1000,
+
+#k-fold CV and grid search, with early stopping
+
+#for batch in list(range(50,500,10)):
+
+
+
 classifier.train(
     input_fn=tf.estimator.inputs.pandas_input_fn(trn.drop('click_time',axis=1),y=trn.is_attributed,
-                    batch_size=128,shuffle=True,num_threads=4),steps=1500) # batch size=1000,
+                    batch_size=128,shuffle=True,num_threads=4),steps=1000) # batch size=1000,
 
-# def predInput_func(df):
-#     features={'ip':df.ip,'app':df.app,'device':df.device,
-#       'os':df.os,'channel':df.channel,'click_hour':df.click_hour,
-#               'scaledHour':df.scaledHour}
-#     return (features,)
-# predictions=classifier.predict(
-#     input_fn=lambda:predInput_func(tst))
+
 predictions=list(classifier.predict(tf.estimator.inputs.pandas_input_fn(tst.drop('click_time',axis=1),shuffle=False)))
 # class_ids determined by alphabetical order?
 #predictions:   list of this :{'logits': array([-7.7193265], dtype=float32), 'logistic': array([ 0.00044396], dtype=float32), 'probabilities': array([  9.99556005e-01,   4.43962432e-04], dtype=float32), 'classes': array([b'0'], dtype=object), 'class_ids': array([0])}

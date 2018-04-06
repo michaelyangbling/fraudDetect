@@ -10,3 +10,33 @@ That's because hash categories provide the model with some separation.
 
 
 ...
+
+
+Neural Network
+When using sample training to do CV (100000 records)
+CV result:
+128 batch size( about 0.994 auc ) performs better than 1000( about 0.991 auc) batch size.
+when using 128 batch size, best CV score until auc decline in validation set ( manual early stopping )
+embed ip:
+embedding_best: 0.994696502302   no_embedding_best:0.9932
+
+
+Full data set:
+CV result:
+embed ip:
+每次mini batch 取128个，几分钟随便跑了跑三万轮gradient descent，6万个test data CV出来0.996的auc。。。不知道为啥做CV准确率这么高，
+
+
+train data from 11-06:
+skip=range(5*(10**7),18*(10**7))
+train=pd.read_csv( data_path+'train.csv.zip', dtype={'ip':'int32','app':'int16','device':'int16',
+                  'os':'int16','channel':'int16','is_attributed':'bool_'}
+                    ,parse_dates=['click_time'], usecols=[0,1,2,3,4,5,7],skiprows=skip)
+
+trn=train.head(80000)
+tst=train.tail(20000000).head(20000) test on11-07data:auc 0.876842606516
+
+but tst on 11-06 tst=train.head(100000).tail(20000) auc=0.923375897179
+
+This implies time series pattern influences a lot on prediction!
+x

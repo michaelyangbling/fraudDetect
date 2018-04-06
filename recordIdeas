@@ -39,4 +39,4 @@ tst=train.tail(20000000).head(20000) test on11-07data:auc 0.876842606516
 but tst on 11-06 tst=train.head(100000).tail(20000) auc=0.923375897179
 
 This implies time series pattern influences a lot on prediction!
-x
+xx

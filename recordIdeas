@@ -25,3 +25,10 @@ Full data set:
 CV result:
 embed ip:
 每次mini batch 取128个，几分钟随便跑了跑三万轮gradient descent，6万个test data CV出来0.996的auc。。。不知道为啥做CV准确率这么高，
+
+
+train data from 11-06:skip=range(5*(10**7),18*(10**7)) trn=train.head(80000) tst=train.tail(20000000).head(20000) test on11-07data:auc 0.876842606516
+
+but tst on 11-06 tst=train.head(100000).tail(20000) auc=0.923375897179
+
+This implies time series pattern influences a lot on prediction!

@@ -5,16 +5,22 @@ import lightgbm as lgb
 import datetime
 import math
 import gc
+#chinese time is UTC +8, UTC time need to plus 8 hours in dataframe
 data_path="/Users/yzh/Desktop/fraudDetect/"
 train=pd.read_csv( data_path+'train_sample.csv', dtype={'ip':'int32','app':'int16','device':'int16',
                   'os':'int16','channel':'int16','is_attributed':'bool_'}
                     ,parse_dates=['click_time'], usecols=[0,1,2,3,4,5,7])#shrink according to data distribution
 #turn into hour
+train['click_time']=train['click_time']+pd.Timedelta(hours=8)
 train['click_hour']=train['click_time'].dt.hour.astype(np.int8)
 from sklearn.preprocessing import StandardScaler
 timeScaler=StandardScaler()  # feature scaling
 timeScaler.fit(train[["click_hour"]])
 train['scaledHour']=timeScaler.transform(train[["click_hour"]])
+#start = pd.to_datetime('11/06/2017 00:00')
+#train['time_diff']=(train.click_time-ini_time).dt.total_seconds()
+#train['difDays']=(train.click_time.dt.normalize()-start).dt.total_seconds()/(3600*24)
+
 trn=train.head(80000)
 myFeatureColumns=[]
 myFeatureColumns.append( tf.feature_column.indicator_column(

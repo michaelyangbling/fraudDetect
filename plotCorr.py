@@ -1,3 +1,4 @@
+#to plot corr: plotCorr.plot
 import seaborn as sns
 import matplotlib.pyplot as plt
 cor=None

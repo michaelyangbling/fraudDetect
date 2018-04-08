@@ -62,3 +62,17 @@ print(ft)
 # is_attributed        bool
 
 # simple LGBM: kaggle-test-score: 0.9622
+
+# train_final = lgb.Dataset( trn.drop(['is_attributed','click_hour','click_time','time_diff','difDays'],axis=1),
+#                         trn['is_attributed'].values)
+# tst_final = lgb.Dataset( tst.drop(['is_attributed','click_hour','click_time','time_diff','difDays'],axis=1),
+#                         tst['is_attributed'].values)
+
+# params = {
+#     'objective': 'binary',
+#     'metric': 'auc',
+#     'learning_rate': 0.1,
+#     'num_leaves': 75,
+#     'num_iterations':200
+# }
+# model = lgb.train(params,train_set=train_final,valid_sets=tst_final, verbose_eval=10)

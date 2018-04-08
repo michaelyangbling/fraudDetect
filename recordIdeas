@@ -40,3 +40,41 @@ but tst on 11-06 tst=train.head(100000).tail(20000) auc=0.923375897179
 
 This implies time series pattern influences a lot on prediction!
 xx
+when only using future to test and use past data to train
+without embedding:0.954779799124
+
+with embedding:0.94612782134(embedding only ip  speed up 10 times)
+result drops!  underlying time series pattern exists in data...
+
+after adding time series features like diffDays and diffSeconds..
+
+sample data~~after adding time series feature: best round at [120]	valid_0's auc: 0.956876
+ft
+      feature       gain  split
+6   time_diff  41.310665  30618
+1         app  33.590455    281
+4     channel  11.374312    313
+5  scaledHour  10.325051   5133
+3          os   3.145820    322
+0          ip   0.170510    282
+2      device   0.080677     46
+7     difDays   0.002509      5
+
+sample data~~no time series feature: best round at [90]	valid_0's auc: 0.943544
+      feature       gain  split
+1         app  41.964600    303
+5  scaledHour  36.043675  12939
+4     channel  15.405695    317
+3          os   5.922034    338
+0          ip   0.436242     79
+2      device   0.227753     57
+
+
+
+embedding: 1500 rounds for shuffle=false
+after adding time series features like diffDays and diffSeconds..
+NNresult drops from about 0.939875163028 to 0.935816659872...
+this is because of feature relevance...
+By looking at correlation matrix, it seems that time_diff and difDays are highly relevant
+
+only adding sDiff 0.9323  only adding dayDiff 0.9354

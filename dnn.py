@@ -117,7 +117,7 @@ print((auc(a2,b2)))
 # is_attributed    0
 # click_hour       0
 # dtype: int64
-
+#
 # print(pd.isnull(test).sum())
 # click_id      0
 # ip            0
@@ -158,3 +158,5 @@ print((auc(a2,b2)))
 # 50%    9.000000e+00 -4.841115e-02
 # 75%    1.400000e+01  7.617462e-01
 # max    2.300000e+01  2.220029e+00
+
+#4:full data

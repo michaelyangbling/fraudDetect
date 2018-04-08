@@ -39,8 +39,8 @@ def getWeight(train): # set weight for imbalanced class to do imbalanced trainng
         print(weight1)
         train['weight']=train.is_attributed.apply(lambda x: weight1 if x==1 else 1)
 getWeight(trn)
-import logging
-logging.getLogger().setLevel(logging.INFO)
+# import logging
+# logging.getLogger().setLevel(logging.INFO)
 #trn=train.head(80000)
 
 
@@ -87,25 +87,44 @@ inputF=tf.estimator.inputs.pandas_input_fn(trn.drop('click_time',axis=1),y=trn.i
 tstN=tst.shape[0]
 tstInput=tf.estimator.inputs.pandas_input_fn(tst.drop('click_time', axis=1), shuffle=False,batch_size=128)
 validAuc=0
-n=0
-for hid in ([35],[100],[10,10],[80,40],[30,20,10],[60,40,20],[40,20,10],[50,25,10,5],[40,30,20,10,5]):
+search={} #grid search
+for hid in ([35],[100],[200],[10,10],[80,40],[160,60],[30,20,10],[70,50,30],[50,25,10,5],[40,30,20,10,5],[65,50,35,20,10]):
   for activ in (tf.nn.elu, tf.nn.relu):
-      for
-  while True: #early stopping using validation set
-    classifier2.train(input_fn=inputF,steps=200)
-    n = n + 1
-    if n<=4:
-        continue
-    predictions2 = classifier2.predict(input_fn=tstInput)
-    probs2 = []
-    for i in predictions2:
-        probs2.append(i['probabilities'][1])
-    a2, b2, c2 = roc_curve(tst['is_attributed'], probs2)
-    aucx=auc(a2, b2)
-    if aucx<=validAuc+0.00002: #0.000001
-        print("auc: "+str(aucx))
-        break
-    validAuc=aucx
+      for drop in (0.1,0.2,0.5):
+          classifier2 = tf.estimator.DNNClassifier(
+              feature_columns=featuCol2,
+              model_dir=None,
+              # Two hidden layers of 10 nodes each.
+              hidden_units=hid,
+              # The model must choose between 3 classes.
+              n_classes=2,
+              activation_fn=activ,
+              weight_column=tf.feature_column.numeric_column(key='weight'),
+              dropout=drop,
+              # dropout=0.5 #regularize
+          )
+          rounds=0
+          n = 0
+          validAuc=0
+          while True:  # early stopping using validation set
+              classifier2.train(input_fn=inputF, steps=200)
+              rounds=rounds+200
+              n = n + 1
+              if n <= 4:
+                  continue
+              predictions2 = classifier2.predict(input_fn=tstInput)
+              probs2 = []
+              for i in predictions2:
+                  probs2.append(i['probabilities'][1])
+              a2, b2, c2 = roc_curve(tst['is_attributed'], probs2)
+              aucx = auc(a2, b2)
+              if aucx <= validAuc + 0.00002:  # 0.000001
+                  info="activation: " + str(activ) + "  units:  " + str(hid) + " dropout: " +\
+                       str(drop) + "  rounds " + str(rounds) + "auc:   " + str(aucx)
+                  search[info]=aucx
+                  print(info)
+                  break
+              validAuc = aucx
 
 # classifier2.train(
 #     input_fn=tf.estimator.inputs.pandas_input_fn(trn.drop('click_time',axis=1),y=trn.is_attributed,

@@ -87,7 +87,7 @@ inputF=tf.estimator.inputs.pandas_input_fn(trn.drop('click_time',axis=1),y=trn.i
 tstN=tst.shape[0]
 tstInput=tf.estimator.inputs.pandas_input_fn(tst.drop('click_time', axis=1), shuffle=False,batch_size=128)
 validAuc=0
-search={} #grid search
+search={} #choose Best Parameters using grid search, each search by early stopping, on validation set:
 for hid in ([35],[100],[200],[10,10],[80,40],[160,60],[30,20,10],[70,50,30],[50,25,10,5],[40,30,20,10,5],[65,50,35,20,10]):
   for activ in (tf.nn.elu, tf.nn.relu):
       for drop in (0.1,0.2,0.5):

@@ -78,3 +78,71 @@ this is because of feature relevance...
 By looking at correlation matrix, it seems that time_diff and difDays are highly relevant
 
 only adding sDiff 0.9323  only adding dayDiff 0.9354
+
+grid search result:
+activation: <function elu at 0x1177e06a8>  units:  [70, 50, 30] dropout: 0.1  rounds 1200auc:   0.942316839005
+activation: <function relu at 0x117805488>  units:  [50, 25, 10, 5] dropout: 0.5  rounds 1200auc:   0.921379268962
+activation: <function relu at 0x117805488>  units:  [40, 30, 20, 10, 5] dropout: 0.5  rounds 1600auc:   0.951233544939
+activation: <function relu at 0x117805488>  units:  [30, 20, 10] dropout: 0.1  rounds 1200auc:   0.951631298986
+activation: <function elu at 0x1177e06a8>  units:  [100] dropout: 0.5  rounds 1200auc:   0.95684600234
+activation: <function elu at 0x1177e06a8>  units:  [10, 10] dropout: 0.1  rounds 1600auc:   0.943892412715
+activation: <function relu at 0x117805488>  units:  [35] dropout: 0.5  rounds 1600auc:   0.9289189473
+activation: <function elu at 0x1177e06a8>  units:  [50, 25, 10, 5] dropout: 0.2  rounds 1200auc:   0.941277781013
+activation: <function elu at 0x1177e06a8>  units:  [80, 40] dropout: 0.5  rounds 2000auc:   0.931897580208
+activation: <function relu at 0x117805488>  units:  [35] dropout: 0.1  rounds 1600auc:   0.948554275448
+activation: <function relu at 0x117805488>  units:  [160, 60] dropout: 0.2  rounds 1800auc:   0.940716998548
+activation: <function relu at 0x117805488>  units:  [70, 50, 30] dropout: 0.1  rounds 1400auc:   0.940472125008
+activation: <function relu at 0x117805488>  units:  [80, 40] dropout: 0.1  rounds 1400auc:   0.941952837798
+activation: <function elu at 0x1177e06a8>  units:  [40, 30, 20, 10, 5] dropout: 0.1  rounds 1600auc:   0.947459183331
+activation: <function relu at 0x117805488>  units:  [10, 10] dropout: 0.5  rounds 1200auc:   0.941064233638
+activation: <function elu at 0x1177e06a8>  units:  [80, 40] dropout: 0.2  rounds 1200auc:   0.953078038329
+activation: <function elu at 0x1177e06a8>  units:  [200] dropout: 0.5  rounds 2400auc:   0.944448783045
+activation: <function elu at 0x1177e06a8>  units:  [50, 25, 10, 5] dropout: 0.5  rounds 3200auc:   0.938038390876
+activation: <function relu at 0x117805488>  units:  [200] dropout: 0.5  rounds 1400auc:   0.950736076623
+activation: <function elu at 0x1177e06a8>  units:  [65, 50, 35, 20, 10] dropout: 0.2  rounds 1200auc:   0.939215107506
+activation: <function elu at 0x1177e06a8>  units:  [70, 50, 30] dropout: 0.2  rounds 1400auc:   0.944881613571
+activation: <function relu at 0x117805488>  units:  [70, 50, 30] dropout: 0.5  rounds 1600auc:   0.944070442396
+activation: <function elu at 0x1177e06a8>  units:  [65, 50, 35, 20, 10] dropout: 0.5  rounds 1600auc:   0.953790377661
+activation: <function relu at 0x117805488>  units:  [65, 50, 35, 20, 10] dropout: 0.1  rounds 1200auc:   0.921037549041
+activation: <function relu at 0x117805488>  units:  [10, 10] dropout: 0.2  rounds 1600auc:   0.952122149098
+activation: <function elu at 0x1177e06a8>  units:  [35] dropout: 0.1  rounds 2600auc:   0.947418591682
+activation: <function elu at 0x1177e06a8>  units:  [40, 30, 20, 10, 5] dropout: 0.5  rounds 1200auc:   0.940619049132
+activation: <function relu at 0x117805488>  units:  [65, 50, 35, 20, 10] dropout: 0.2  rounds 1200auc:   0.9445350403
+activation: <function elu at 0x1177e06a8>  units:  [65, 50, 35, 20, 10] dropout: 0.1  rounds 1800auc:   0.940093563753
+activation: <function relu at 0x117805488>  units:  [200] dropout: 0.2  rounds 1200auc:   0.943321482336
+activation: <function relu at 0x117805488>  units:  [50, 25, 10, 5] dropout: 0.2  rounds 1400auc:   0.91698831137
+activation: <function elu at 0x1177e06a8>  units:  [160, 60] dropout: 0.5  rounds 1200auc:   0.94078626908
+activation: <function relu at 0x117805488>  units:  [100] dropout: 0.1  rounds 1200auc:   0.917147368867
+activation: <function elu at 0x1177e06a8>  units:  [30, 20, 10] dropout: 0.5  rounds 1800auc:   0.948323520743
+activation: <function elu at 0x1177e06a8>  units:  [30, 20, 10] dropout: 0.1  rounds 1200auc:   0.92107681705
+activation: <function elu at 0x1177e06a8>  units:  [35] dropout: 0.5  rounds 1400auc:   0.949677605234
+activation: <function elu at 0x1177e06a8>  units:  [100] dropout: 0.2  rounds 1600auc:   0.954180631077
+activation: <function relu at 0x117805488>  units:  [100] dropout: 0.2  rounds 1200auc:   0.937692038213
+activation: <function elu at 0x1177e06a8>  units:  [200] dropout: 0.1  rounds 1400auc:   0.951420398892
+activation: <function elu at 0x1177e06a8>  units:  [200] dropout: 0.2  rounds 1600auc:   0.949644955429
+activation: <function elu at 0x1177e06a8>  units:  [35] dropout: 0.2  rounds 2200auc:   0.951584971559
+activation: <function elu at 0x1177e06a8>  units:  [10, 10] dropout: 0.2  rounds 4000auc:   0.93931040964
+activation: <function elu at 0x1177e06a8>  units:  [30, 20, 10] dropout: 0.2  rounds 1400auc:   0.948613839282
+activation: <function relu at 0x117805488>  units:  [30, 20, 10] dropout: 0.2  rounds 2400auc:   0.948586925253
+activation: <function relu at 0x117805488>  units:  [65, 50, 35, 20, 10] dropout: 0.5  rounds 1400auc:   0.933208866981
+activation: <function elu at 0x1177e06a8>  units:  [80, 40] dropout: 0.1  rounds 1800auc:   0.948974751994
+activation: <function relu at 0x117805488>  units:  [100] dropout: 0.5  rounds 3400auc:   0.936892117984
+activation: <function relu at 0x117805488>  units:  [10, 10] dropout: 0.1  rounds 2200auc:   0.960269378542
+activation: <function elu at 0x1177e06a8>  units:  [10, 10] dropout: 0.5  rounds 1200auc:   0.925851630461
+activation: <function relu at 0x117805488>  units:  [160, 60] dropout: 0.1  rounds 1200auc:   0.939447406458
+activation: <function relu at 0x117805488>  units:  [80, 40] dropout: 0.2  rounds 1400auc:   0.950555179053
+activation: <function relu at 0x117805488>  units:  [40, 30, 20, 10, 5] dropout: 0.1  rounds 1200auc:   0.935675030311
+activation: <function elu at 0x1177e06a8>  units:  [40, 30, 20, 10, 5] dropout: 0.2  rounds 1200auc:   0.932149071951
+activation: <function relu at 0x117805488>  units:  [40, 30, 20, 10, 5] dropout: 0.2  rounds 6200auc:   0.943968301451
+activation: <function elu at 0x1177e06a8>  units:  [160, 60] dropout: 0.2  rounds 1200auc:   0.948461620595
+activation: <function elu at 0x1177e06a8>  units:  [100] dropout: 0.1  rounds 1800auc:   0.952190316597
+activation: <function elu at 0x1177e06a8>  units:  [50, 25, 10, 5] dropout: 0.1  rounds 1200auc:   0.95596710488
+activation: <function relu at 0x117805488>  units:  [80, 40] dropout: 0.5  rounds 1200auc:   0.934514197371
+activation: <function relu at 0x117805488>  units:  [50, 25, 10, 5] dropout: 0.1  rounds 1200auc:   0.945855813165
+activation: <function relu at 0x117805488>  units:  [200] dropout: 0.1  rounds 1600auc:   0.947224016491
+activation: <function relu at 0x117805488>  units:  [30, 20, 10] dropout: 0.5  rounds 3200auc:   0.94568285744
+activation: <function elu at 0x1177e06a8>  units:  [160, 60] dropout: 0.1  rounds 1200auc:   0.934208656963
+activation: <function relu at 0x117805488>  units:  [160, 60] dropout: 0.5  rounds 2200auc:   0.949790776518
+activation: <function elu at 0x1177e06a8>  units:  [70, 50, 30] dropout: 0.5  rounds 1200auc:   0.946199518548
+activation: <function relu at 0x117805488>  units:  [70, 50, 30] dropout: 0.2  rounds 2200auc:   0.947006498194
+activation: <function relu at 0x117805488>  units:  [35] dropout: 0.2  rounds 1200auc:   0.944399367123
